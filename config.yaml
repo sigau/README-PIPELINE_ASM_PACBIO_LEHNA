@@ -1,0 +1,4 @@
+reads_folder: "data/long-reads"
+out_dir: "test_output"
+asm_name: "test_proasellus_coiffaiti_G3_3X"
+busco_db: "chlorophyta_obd10"
