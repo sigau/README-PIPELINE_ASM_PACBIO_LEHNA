@@ -52,7 +52,7 @@ rule assembly_hifiasm:
 
 rule QC_assembly_quast:
     input:
-        rules.assembly_hifiasm.output
+        rules.assembly_hifiasm.output.fa
     output:
         expand("{out_dir}/QC/QUAST/DRAFT_ASSEMBLY/report.tsv", out_dir=config["out_dir"])
     threads: 4 
@@ -68,7 +68,7 @@ rule QC_assembly_quast:
 
 rule QC_assembly_busco:
     input:
-        rules.assembly_hifiasm.output
+        rules.assembly_hifiasm.output.fa
     output:
         expand("{out_dir}/QC/BUSCO/{asm_name}_DRAFT/logs/busco.log", out_dir=config["out_dir"],asm_name=config["asm_name"])
     threads: 4
@@ -81,7 +81,7 @@ rule QC_assembly_busco:
     conda:
         "env/busco.yaml"
     shell:
-        "( busco -f -c {threads} -l {params.db} -m genome --out_path {params.out_dir} -i {input} -o  {params.busco_name}) 2> {log}"
+        "( busco -f -c {threads} -l {params.db} -m genome --out_path {params.out_dir} -i {input} -o {params.busco_name}) 2> {log}"
 
 rule assembly:
     input:
